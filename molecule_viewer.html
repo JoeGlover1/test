@@ -1,0 +1,46 @@
+<div id="3dmolviewer_17416947205112364"  style="position: relative; width: 600px; height: 400px;">
+        <p id="3dmolwarning_17416947205112364" style="background-color:#ffcccc;color:black">3Dmol.js failed to load for some reason.  Please check your browser console for error messages.<br></p>
+        </div>
+<script>
+
+var loadScriptAsync = function(uri){
+  return new Promise((resolve, reject) => {
+    //this is to ignore the existence of requirejs amd
+    var savedexports, savedmodule;
+    if (typeof exports !== 'undefined') savedexports = exports;
+    else exports = {}
+    if (typeof module !== 'undefined') savedmodule = module;
+    else module = {}
+
+    var tag = document.createElement('script');
+    tag.src = uri;
+    tag.async = true;
+    tag.onload = () => {
+        exports = savedexports;
+        module = savedmodule;
+        resolve();
+    };
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+});
+};
+
+if(typeof $3Dmolpromise === 'undefined') {
+$3Dmolpromise = null;
+  $3Dmolpromise = loadScriptAsync('https://cdnjs.cloudflare.com/ajax/libs/3Dmol/2.4.2/3Dmol-min.js');
+}
+
+var viewer_17416947205112364 = null;
+var warn = document.getElementById("3dmolwarning_17416947205112364");
+if(warn) {
+    warn.parentNode.removeChild(warn);
+}
+$3Dmolpromise.then(function() {
+viewer_17416947205112364 = $3Dmol.createViewer(document.getElementById("3dmolviewer_17416947205112364"),{backgroundColor:"white"});
+viewer_17416947205112364.zoomTo();
+	viewer_17416947205112364.addModel("TITL ACETAC01-QR-15-3102-3 -53.5434 1.1519\nCELL 0.7 7.0238 10.8618 9.0782 90 89.6047 90\nLATT 7\nSYMM -x,+y,1/2-z\nSFAC C O H\nC1    1       0.252452500000       0.430602720000       0.544899340000\nC2    1       0.254407220000       0.564488110000       0.576459150000\nH1    3       0.258463690000       0.271276370000       0.638043540000\nH2    3       0.258500000000       0.615401060000       0.469839190000\nH3    3       0.126568930000       0.593701840000       0.633764270000\nH4    3       0.375338610000       0.591528270000       0.638990940000\nO1    2       0.259853730000       0.361010850000       0.663730890000\nO2    2       0.241777250000       0.386765150000       0.421593380000","res");
+	viewer_17416947205112364.setStyle({"stick": {}});
+	viewer_17416947205112364.zoomTo();
+viewer_17416947205112364.render();
+});
+</script>
